@@ -128,9 +128,6 @@ angular.module('starter.controllers', [])
 
 
 .controller('MapCtrl', function($scope, $stateParams) {
-    
-    var map = null;
-    
     var distance = null; // km
     var service = null;
     var gmarkers = [];
@@ -142,14 +139,16 @@ angular.module('starter.controllers', [])
     var directionsService = new google.maps.DirectionsService();
     var directionsDisplay = new google.maps.DirectionsRenderer();
     
-    var marker = new google.maps.Marker();   
-    
-    var start; var destination;
-    
-  
+    var marker = new google.maps.Marker(); 
+	
+	$scope.$on('$ionicView.afterEnter', function(){
+          initialize(); 
+     }); 
+	var map;
       function initialize() {
-        
-        myLatlng12 = new google.maps.LatLng(30.731212, 76.830220);
+          
+    
+    myLatlng12 = new google.maps.LatLng(30.731212, 76.830220);
                         
         var mapOptions = {
             center: myLatlng12,
@@ -162,9 +161,9 @@ angular.module('starter.controllers', [])
           //  }
         };
  
-        map = new google.maps.Map(document.getElementById("map"), mapOptions);  
-        
-        navigator.geolocation.getCurrentPosition(function(pos) {    console.log(pos);    
+        map = new google.maps.Map(document.getElementById("map"), mapOptions);
+		
+		navigator.geolocation.getCurrentPosition(function(pos) {    console.log(pos);    
 
         myLatlng12 = new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude);
         
@@ -177,55 +176,39 @@ angular.module('starter.controllers', [])
             animation: google.maps.Animation.DROP,
             title: 'My Location'
           });
-          
-          
-          
         $scope.map = map;
-        
         });
+		
+		        officeLatLng = new google.maps.LatLng(30.694209, 76.860565);
         
-        
-        officeLatLng = new google.maps.LatLng(30.694209, 76.860565);
-        
-        map.setCenter(officeLatLng); 
-        
-        marker = new google.maps.Marker({
-            position: officeLatLng,
-            map: map,
-            icon: 'img/store_32x32.png',
-            title: 'My Office'
-          });
-          
-          var contentStr = '<h5>Panchkula Eco City,</h5><p>Sector 12, Adjoining HSIIDC</p><p>NH 73, Panchkula Ext. 11.</p>';
-                    
-                    
-        contentStr += '<p>+91-9216590011, 22, 33</p>';
-        contentStr += '<p>http://www.idyllicgroup.in/</p>';
-        
-        contentStr += '<br/><b>Click on marker to show route.</b>';
-        
-        var infowindowp = new google.maps.InfoWindow();
-        infowindowp.setContent(contentStr);
-        infowindowp.open(map,marker);
-        
-        marker.addListener('click', function (event) {
-            drawRoute(myLatlng12, this.position);
-        });
-        
-    }
-      
-
-     $scope.$on('$ionicView.afterEnter', function(){
-          initialize(); 
-     });  
-     
-     
-     
-     
-     
-     
-     function drawRoute(start, destination){
-            
+				map.setCenter(officeLatLng); 
+				
+				marker = new google.maps.Marker({
+					position: officeLatLng,
+					map: map,
+					icon: 'img/store_32x32.png',
+					title: 'My Office'
+				  });
+				  
+				  var contentStr = '<h5>Panchkula Eco City,</h5><p>Sector 12, Adjoining HSIIDC</p><p>NH 73, Panchkula Ext. 11.</p>';
+							
+							
+				contentStr += '<p>+91-9216590011, 22, 33</p>';
+				contentStr += '<p>http://www.idyllicgroup.in/</p>';
+				
+				contentStr += '<br/><b>Click on marker to show route.</b>';
+				
+				var infowindowp = new google.maps.InfoWindow();
+				infowindowp.setContent(contentStr);
+				infowindowp.open(map,marker);
+				
+				marker.addListener('click', function (event) { //alert("Hi"); alert(myLatlng12);  alert(this.position);
+					drawRoute(myLatlng12, this.position);
+				});
+      }
+	  
+	  function drawRoute(start, destination){
+           // alert("drow");
        var travelMode = 'DRIVING';
                      
         var request = {
@@ -234,11 +217,12 @@ angular.module('starter.controllers', [])
             travelMode : google.maps.DirectionsTravelMode[travelMode]
         };  console.log("98"); console.log(request);
         
-        service = new google.maps.places.PlacesService(map);
-
+      //  service = new google.maps.places.PlacesService(map);
+	  
+		
         
-        directionsService.route(request, function(response, status) {
-            if (status == google.maps.DirectionsStatus.OK) {
+        directionsService.route(request, function(response, status) { ///alert("theri");
+            if (status == google.maps.DirectionsStatus.OK) { //alert("ok");
                 
                 directionsDisplay.setDirections(response); console.log("Route Response"); console.log(response);
             
@@ -281,7 +265,10 @@ angular.module('starter.controllers', [])
                     console.log(summaryPanel);
                      launchNavi(start, destination);
    
-            }  
+            }else{
+				alert("error");
+			}
+			launchNavi(start, destination);
         });
         directionsDisplay.setPanel(document.getElementById('right-panel'));
         directionsDisplay.setMap(map);  console.log("Right Panel ABCDEFGHIJKLMNOPQRSTUVWXYZ");
@@ -289,33 +276,30 @@ angular.module('starter.controllers', [])
         
         // var navigatorIcon = angular.element( document.querySelector( '#navigator' ) );
         // navigatorIcon.html('<a class="tab-item" ng-click="launchNavi('+start+','+destination+')">  <i class="icon ion-navigate" ></i> Navigation </a> ');
-         
-         
-            
       }
       
       
       function launchNavi(start, destination){ //alert("navigatoin");
-                var dlat = destination.lat();
-                var dlng = destination.lng();
-                var slat = destination.lat();
-                var slng = destination.lng();
-                
-                launchnavigator.navigate(
-                  [dlat, dlng],
-                  //[slat, slng],
-                  function(success){ console.log(success);
-                     // alert("Plugin success");
-                  },
-                  function(error){
-                    //alert("Please choose destination point on map");
-                     // alert("Plugin error: "+ error);
-                  },
-                  {
-                    navigationMode: "turn-by-turn",
-                    transportMode: "DRIVING",
-                    disableAutoGeolocation: false
-                  });  //alert("Hello");
-               }
-
+		var dlat = destination.lat();
+		var dlng = destination.lng();
+		var slat = destination.lat();
+		var slng = destination.lng();
+		
+		launchnavigator.navigate(
+		  [dlat, dlng],
+		  //[slat, slng],
+		  function(success){ console.log(success);
+			 // alert("Plugin success");
+		  },
+		  function(error){
+			//alert("Please choose destination point on map");
+			 // alert("Plugin error: "+ error);
+		  },
+		  {
+			navigationMode: "turn-by-turn",
+			transportMode: "DRIVING",
+			disableAutoGeolocation: false
+		  });  //alert("Hello");
+	   }
+   
 });

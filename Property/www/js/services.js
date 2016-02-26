@@ -21,11 +21,11 @@ angular.module('starter.services', [])
                     var firstPart = String(text).substring(0, maxLength);
                     var secondPart = String(text).substring(maxLength, text.length);
 
-                     var firstSpan = $compile('<span>' + firstPart + '</span>')(scope);
-                    var secondSpan = $compile('<span ng-if="collapsed">' + secondPart + '</span>')(scope);
-                    var moreIndicatorSpan = $compile('<span ng-if="!collapsed">... </span>')(scope);
+                    var firstSpan = $compile('<span style="align:justify;">' + firstPart + '</span>')(scope);
+                    var secondSpan = $compile('<span style="align:justify;" ng-if="collapsed">' + secondPart + '</span>')(scope);
+                    var moreIndicatorSpan = $compile('<span style="align:justify;" ng-if="!collapsed">... </span>')(scope);
                     var lineBreak = $compile('<br ng-if="collapsed">')(scope);
-                    var toggleButton = $compile('<span class="collapse-text-toggle" ng-click="toggle()" style="color: #0c63ee;font-weight: 600;text-decoration: underline;">{{collapsed ? "Read Less" : "Read More"}}</span>')(scope);
+                    var toggleButton = $compile('<span style="align:justify;" class="collapse-text-toggle" ng-click="toggle()" style="color: #0c63ee;font-weight: 600;text-decoration: underline;">{{collapsed ? "Read Less" : "Read More"}}</span>')(scope);
 
                     element.empty();
                     element.append(firstSpan);
