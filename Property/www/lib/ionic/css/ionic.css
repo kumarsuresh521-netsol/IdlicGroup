@@ -7787,14 +7787,27 @@ a.button {
     color: #fff !important;
     /* border-radius: 8px !important; */
   }
+  .whatweareoffering .list{
+	  float:left;
+	  height:100%;
+	  width:100%;
+  }
   
+    .whatweareoffering .list .card{
+	  float:left;
+	  height:50%;
+	  width:100%;
+  }
   .inquiryform .icon{
     font-size: 25px; 
 	padding-right:15px; 
 	color: #387EF5;
   }
   .inquiryform .icon{
-    border: 1px solid #ddd;
+/*    border: 1px solid #ddd; */
+  }
+  .inquiryform  label{
+    border: 1px solid #ddd !important;
   }
   /* Menu */
   .propertyMenu .icon{
@@ -7917,4 +7930,26 @@ a.button {
    /* background: rgba(0, 0, 0, 0.61); */
     color: #fff;
     padding: 2px 0 6px 0;
+}    
+.whatweareoffering  .banner_text{
+position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    height: 50px;
+    margin: auto;
+    width: auto;
+    text-align: center;
+    z-index: 100;
+}
+.whatweareoffering  .banner_text h2{
+    color: #fff;
+    font-size: 22px;
+    text-align: center;
+    width: auto;
+    padding: 5px 0;
+    border-top: 1px solid #fff;
+    border-bottom: 1px solid #fff;
+    display: inline-block;
 }
