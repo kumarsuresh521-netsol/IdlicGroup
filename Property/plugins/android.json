@@ -27,6 +27,9 @@
         },
         "cordova-plugin-inappbrowser": {
             "PACKAGE_NAME": "com.ionicframework.restaurant3314339property"
+        },
+        "cordova-plugin-network-information": {
+            "PACKAGE_NAME": "com.ionicframework.restaurant3314339property"
         }
     },
     "dependent_plugins": {}

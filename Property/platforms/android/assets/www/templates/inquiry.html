@@ -1,7 +1,7 @@
 <ion-view view-title="Inquiry Form">
   <ion-content ng-controller="InquiryCtrl" class="inquiryform">
 
-    <div class="list list-inset" style="border: none;">
+    <div class="list list-inset" style="border: none;height:100%;">
       <label class="item item-input"> 
         <i class="icon ion-person"></i><input type="text" placeholder="Name" ng-model="name"/>  
       </label>
@@ -30,6 +30,6 @@
       <br />
       <button class="button button-block button-positive" ng-click="submitForm()"> Submit </button>
     </div>
-    <div class="card" id="msg"></div>
+    <div id="msg" style="bottom: 80px;"></div>
   </ion-content>
 </ion-view>

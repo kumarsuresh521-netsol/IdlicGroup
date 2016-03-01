@@ -23,7 +23,11 @@ angular.module('starter.controllers', [])
 })
 
 .controller('CategoryCtrl', function($scope, $stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk, $ionicHistory) {
-    
+     $ionicHistory.nextViewOptions({
+	  disableBack: true
+	});
+	$ionicHistory.clearHistory();
+	$ionicHistory.clearCache();
 })
 
 .controller('PlaylistsCtrl', function($scope) {
@@ -37,9 +41,15 @@ angular.module('starter.controllers', [])
   ];
 })
 
-.controller('InquiryCtrl', function($scope, $stateParams, EmailComposer) { 
+.controller('InquiryCtrl', function($scope, $stateParams, EmailComposer, $ionicHistory) { 
     $scope.meetingtime = "Meeting Time";
     
+	$ionicHistory.nextViewOptions({
+	  disableBack: true
+	});
+	$ionicHistory.clearHistory();
+	$ionicHistory.clearCache();
+	
     $scope.showSelectValue = function(meetingtime) {
         $scope.meetingtime = meetingtime;
     }
@@ -53,25 +63,31 @@ angular.module('starter.controllers', [])
         
         if(!name){
             var msg = document.getElementById('msg');
+			msg.className = "card";
             msg.innerHTML = "Please Enter your name.";
                setTimeout(function() {
+				   msg.className = "";
                     msg.innerHTML = ''
-                }, 3000);
+                }, 300000);
                 return;
         } else if(email){
              var re = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
              if(!re.test(email)){
                var msg = document.getElementById('msg');
+			   msg.className = "card";
                 msg.innerHTML = "Email is not correct.";
                    setTimeout(function() {
+					   msg.className = "";
                         msg.innerHTML = ''
                     }, 3000);
                return;
              }
         } else if(!phone){
             var msg = document.getElementById('msg');
+			msg.className = "card";
             msg.innerHTML = "Please Enter your phone number.";
                setTimeout(function() {
+				   msg.className = "";
                     msg.innerHTML = ''
                 }, 3000);
                 return;
@@ -115,19 +131,12 @@ angular.module('starter.controllers', [])
         console.log(email);
          EmailComposer.open(email).then(null, function () { //alert("success");
            // user cancelled email
-         });
-        
-        
-        
-        
-        
-        
-        
+         });   
     }
 })
 
 
-.controller('MapCtrl', function($scope, $stateParams) {
+.controller('MapCtrl', function($scope, $stateParams, $state, $ionicHistory) { //alert("Hi map");
     var distance = null; // km
     var service = null;
     var gmarkers = [];
@@ -141,8 +150,22 @@ angular.module('starter.controllers', [])
     
     var marker = new google.maps.Marker(); 
 	
+	$ionicHistory.nextViewOptions({
+	  disableBack: true
+	});
+	$ionicHistory.clearHistory();
+	$ionicHistory.clearCache();
+	
 	$scope.$on('$ionicView.afterEnter', function(){
-          initialize(); 
+		connectionStatus = navigator.onLine ? 'online' : 'offline';  //alert(connectionStatus);
+		if(connectionStatus == 'offline'){
+			alert("Please check your internet connection.");
+			$state.go("app.category");
+			return;
+		} else { //alert('networking');
+			initialize();
+		}
+           
      }); 
 	var map;
       function initialize() {
