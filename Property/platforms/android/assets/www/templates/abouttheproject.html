@@ -1,10 +1,11 @@
 <ion-view view-title="About The Project">
-    <ion-header-bar  class="bar-subheader bar-dark" ng-class="{'bar-subheader-spde-away': spdeHeader}">
-        <div class="hero " style="background-image: url('img/about_project_image.png');"></div>
+    <ion-header-bar  class="bar-subheader">
+        <div class="hero">
+			<img src="img/about_project_image.png"/>
+		</div>
      </ion-header-bar>
-  <ion-content ng-class="{expanded:isExpanded}" class="condensed-space no-padding animate-fade-spde-in">
-        <div class="card abouttheproject" style="top: 200px;">
- <!--         <img src="img/img1.jpeg"/> -->
+  <ion-content ng-controller="AboutTheProjectCtrl">
+        <div class="card abouttheproject" style=" margin-top: 260px !important;">
           <h2 style="text-apgn: center;">About The Project</h2>
           <div style="padding: 8px;"dd-text-collapse dd-text-collapse-max-length="500" dd-text-collapse-text="{{description}}"></div>
           <h3>The Privilege Of Leisure</h3><hr />

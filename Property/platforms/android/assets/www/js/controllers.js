@@ -4,25 +4,13 @@ angular.module('starter.controllers', [])
 
 })
 
-.controller('AboutTheProjectCtrl', function($scope, $ionicScrollDelegate, $rootScope) {
+.controller('', function($scope, $ionicScrollDelegate, $rootScope) {
   var description = 'With similar sonata treasured in Panchkula, Panchkula Extn. II is developed with surplus benefits to augment the paramount. Panchkula Extn. II is an approved township by Town and Country Planning, Department of Haryana. Panchkula Extn. II is planned by Govt. of Haryana with the motive to expand space for future novelty, both in terms of society & technology. Now to build a sheer abode, Sector 12 the heart of city was chosen to entrench Panchkula Eco City. The crown area of sector 12 has perpetual benefits to offer to its residents. Situated on NH-73, 15 kms from Chandigarh, Panchkula Eco City is selected with 300 ft. wide green belts in front & 100 ft. at the back. With four lane road planned "to be laid" by NHAI for smooth traffic flow, two World Class multilevel parkings, 80 ft. circulation road in front, 200 ft. on one side and 40-80 ft. internal circulation roads, there are much more comprehension to amaze you. Being close to upcoming 600 acres area acquired by HSIIDC in sector 10 & 13, existing HSIIDC estate itself and thoroughly connected to Panchkula Industrial Area & I.T. Park, Panchkula Eco City offers you close at hand employment opportunities, to gear your career calls. The surplus feature of the sector & township site both is, the Easy drive connectivity to Airport & proposed flyover connecting sector 12 to sector 17 for occupants to cross the highway with ease. To precise the list of amenities, Panchkula Eco City is designed with Showrooms & Convenience Shops, 24 Hrs Operational ATMs in vicinity, Zee School in 1 km approach area & 16 Hole Golf Course to offer a sheer living space. All this and much more illustrations boated at your disposal, leads to exceptional recital of our motive to serve PERFECTION to our clientele.';
   $scope.description = description;
 })
 
-.controller('CartCtrl', function($scope, $stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk, $ionicHistory) {
-    
-    // Set Motion
-    $timeout(function() {
-        ionicMaterialMotion.fadeSlideIn({
-            selector: '.animate-fade-slide-in .item'
-        });
-    }, 200);
 
-    // Set Ink
-    ionicMaterialInk.displayEffect();
-})
-
-.controller('CategoryCtrl', function($scope, $stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk, $ionicHistory) {
+.controller('CategoryCtrl', function($scope, $ionicHistory) {
      $ionicHistory.nextViewOptions({
 	  disableBack: true
 	});
@@ -30,18 +18,55 @@ angular.module('starter.controllers', [])
 	$ionicHistory.clearCache();
 })
 
-.controller('PlaylistsCtrl', function($scope) {
-  $scope.playlists = [
-    { title: 'Reggae', id: 1 },
-    { title: 'Chill', id: 2 },
-    { title: 'Dubstep', id: 3 },
-    { title: 'Indie', id: 4 },
-    { title: 'Rap', id: 5 },
-    { title: 'Cowbell', id: 6 }
-  ];
+.controller('ContactCtrl', function($scope, $ionicHistory) {
+     $ionicHistory.nextViewOptions({
+	  disableBack: true
+	});
+	$ionicHistory.clearHistory();
+	$ionicHistory.clearCache();
 })
 
-.controller('InquiryCtrl', function($scope, $stateParams, EmailComposer, $ionicHistory) { 
+.controller('WhatAreWeOffringCtrl', function($scope, $ionicHistory) {
+     /*$ionicHistory.nextViewOptions({
+	  disableBack: true
+	});
+	$ionicHistory.clearHistory();
+	$ionicHistory.clearCache(); */
+})
+
+.controller('AboutUsCtrl', function($scope, $ionicHistory) {
+     $ionicHistory.nextViewOptions({
+	  disableBack: true
+	});
+	$ionicHistory.clearHistory();
+	$ionicHistory.clearCache();
+})
+
+.controller('AboutTheProjectCtrl', function($scope, $ionicHistory) {
+     /*$ionicHistory.nextViewOptions({
+	  disableBack: true
+	});
+	$ionicHistory.clearHistory();
+	$ionicHistory.clearCache(); */
+})
+
+.controller('ResidentialCtrl', function($scope, $ionicHistory) {
+     /*$ionicHistory.nextViewOptions({
+	  disableBack: true
+	});
+	$ionicHistory.clearHistory();
+	$ionicHistory.clearCache();*/
+})
+
+.controller('CommercialCtrl', function($scope, $ionicHistory) {
+     /*$ionicHistory.nextViewOptions({
+	  disableBack: true
+	});
+	$ionicHistory.clearHistory();
+	$ionicHistory.clearCache();*/
+})
+
+.controller('InquiryCtrl', function($scope, EmailComposer, $ionicHistory) { 
     $scope.meetingtime = "Meeting Time";
     
 	$ionicHistory.nextViewOptions({
@@ -68,7 +93,7 @@ angular.module('starter.controllers', [])
                setTimeout(function() {
 				   msg.className = "";
                     msg.innerHTML = ''
-                }, 300000);
+                }, 3000);
                 return;
         } else if(email){
              var re = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
@@ -136,7 +161,7 @@ angular.module('starter.controllers', [])
 })
 
 
-.controller('MapCtrl', function($scope, $stateParams, $state, $ionicHistory) { //alert("Hi map");
+.controller('MapCtrl', function($scope, $state, $ionicHistory, $ionicLoading, $timeout) { //alert("Hi map");
     var distance = null; // km
     var service = null;
     var gmarkers = [];
@@ -157,14 +182,31 @@ angular.module('starter.controllers', [])
 	$ionicHistory.clearCache();
 	
 	$scope.$on('$ionicView.afterEnter', function(){
-		connectionStatus = navigator.onLine ? 'online' : 'offline';  //alert(connectionStatus);
-		if(connectionStatus == 'offline'){
-			alert("Please check your internet connection.");
-			$state.go("app.category");
-			return;
-		} else { //alert('networking');
-			initialize();
+		$ionicLoading.show();
+		
+		function checkConnection(){
+			connectionStatus = navigator.onLine ? 'online' : 'offline';  //alert(connectionStatus);
+			
+			if(connectionStatus == 'offline'){
+				$ionicLoading.hide();
+				alert("Please check your internet connection.");
+				$state.go("app.category");
+				return;
+			} else if(connectionStatus == 'online'){ //alert('networking');
+				$ionicLoading.hide();
+				initialize();
+			} else {
+				$ionicLoading.hide();
+				$state.go("app.category");
+			}
 		}
+		
+		$timeout(function() {
+			checkConnection();
+		 }, 3000);
+		
+		
+		
            
      }); 
 	var map;
