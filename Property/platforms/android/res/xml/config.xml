@@ -51,7 +51,7 @@
     <author email="kumarsuresh521@gmail.com" href="https://branded.me/kumarsuresh521/">
       Suresh Kumar
     </author>
-    <content src="index.html" />
+    <content original-src="index.html" src="http://172.16.13.78:8100" />
     <access origin="*" />
     <preference name="webviewbounce" value="false" />
     <preference name="UIWebViewBounce" value="false" />

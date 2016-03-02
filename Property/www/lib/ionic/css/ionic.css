@@ -8001,3 +8001,8 @@ a.button {
     position: absolute;
     width: 100%;
 }
+
+.collapse-text-toggle{
+	color:#0066ff !important;
+	text-decoration:underline !important;
+}

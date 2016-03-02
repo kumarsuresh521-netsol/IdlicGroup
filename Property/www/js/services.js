@@ -25,7 +25,7 @@ angular.module('starter.services', [])
                     var secondSpan = $compile('<span style="align:justify;" ng-if="collapsed">' + secondPart + '</span>')(scope);
                     var moreIndicatorSpan = $compile('<span style="align:justify;" ng-if="!collapsed">... </span>')(scope);
                     var lineBreak = $compile('<br ng-if="collapsed">')(scope);
-                    var toggleButton = $compile('<span style="align:justify;" class="collapse-text-toggle" ng-click="toggle()" style="color: #0c63ee;font-weight: 600;text-decoration: underline;">{{collapsed ? "Read Less" : "Read More"}}</span>')(scope);
+                    var toggleButton = $compile('<span style="align:justify;" class="collapse-text-toggle" ng-click="toggle()" style="color: #0066ff !important;font-weight: 600 !important;text-decoration: underline !important;">{{collapsed ? "Read Less" : "Read More"}}</span>')(scope);
 
                     element.empty();
                     element.append(firstSpan);

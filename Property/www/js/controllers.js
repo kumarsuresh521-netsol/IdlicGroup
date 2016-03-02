@@ -4,7 +4,7 @@ angular.module('starter.controllers', [])
 
 })
 
-.controller('', function($scope, $ionicScrollDelegate, $rootScope) {
+.controller('AboutTheProjectCtrl', function($scope, $ionicScrollDelegate, $rootScope) {
   var description = 'With similar sonata treasured in Panchkula, Panchkula Extn. II is developed with surplus benefits to augment the paramount. Panchkula Extn. II is an approved township by Town and Country Planning, Department of Haryana. Panchkula Extn. II is planned by Govt. of Haryana with the motive to expand space for future novelty, both in terms of society & technology. Now to build a sheer abode, Sector 12 the heart of city was chosen to entrench Panchkula Eco City. The crown area of sector 12 has perpetual benefits to offer to its residents. Situated on NH-73, 15 kms from Chandigarh, Panchkula Eco City is selected with 300 ft. wide green belts in front & 100 ft. at the back. With four lane road planned "to be laid" by NHAI for smooth traffic flow, two World Class multilevel parkings, 80 ft. circulation road in front, 200 ft. on one side and 40-80 ft. internal circulation roads, there are much more comprehension to amaze you. Being close to upcoming 600 acres area acquired by HSIIDC in sector 10 & 13, existing HSIIDC estate itself and thoroughly connected to Panchkula Industrial Area & I.T. Park, Panchkula Eco City offers you close at hand employment opportunities, to gear your career calls. The surplus feature of the sector & township site both is, the Easy drive connectivity to Airport & proposed flyover connecting sector 12 to sector 17 for occupants to cross the highway with ease. To precise the list of amenities, Panchkula Eco City is designed with Showrooms & Convenience Shops, 24 Hrs Operational ATMs in vicinity, Zee School in 1 km approach area & 16 Hole Golf Course to offer a sheer living space. All this and much more illustrations boated at your disposal, leads to exceptional recital of our motive to serve PERFECTION to our clientele.';
   $scope.description = description;
 })
@@ -42,13 +42,7 @@ angular.module('starter.controllers', [])
 	$ionicHistory.clearCache();
 })
 
-.controller('AboutTheProjectCtrl', function($scope, $ionicHistory) {
-     /*$ionicHistory.nextViewOptions({
-	  disableBack: true
-	});
-	$ionicHistory.clearHistory();
-	$ionicHistory.clearCache(); */
-})
+
 
 .controller('ResidentialCtrl', function($scope, $ionicHistory) {
      /*$ionicHistory.nextViewOptions({
@@ -165,15 +159,7 @@ angular.module('starter.controllers', [])
     var distance = null; // km
     var service = null;
     var gmarkers = [];
-    
-    var infowindow = new google.maps.InfoWindow();
-
     var myLatlng12; var myLatLng; var officeLatLng;
-    
-    var directionsService = new google.maps.DirectionsService();
-    var directionsDisplay = new google.maps.DirectionsRenderer();
-    
-    var marker = new google.maps.Marker(); 
 	
 	$ionicHistory.nextViewOptions({
 	  disableBack: true
@@ -209,8 +195,14 @@ angular.module('starter.controllers', [])
 		
            
      }); 
+	
 	var map;
-      function initialize() {
+	var infowindow = new google.maps.InfoWindow();
+    var directionsService = new google.maps.DirectionsService();
+    var directionsDisplay = new google.maps.DirectionsRenderer();
+    var marker = new google.maps.Marker(); 
+    
+    function initialize() {
           
     
     myLatlng12 = new google.maps.LatLng(30.731212, 76.830220);
