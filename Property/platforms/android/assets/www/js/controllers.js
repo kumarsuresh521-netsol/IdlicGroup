@@ -337,14 +337,14 @@ angular.module('starter.controllers', [])
       
       
       function launchNavi(start, destination){ //alert("navigatoin");
-		var dlat = destination.lat();
-		var dlng = destination.lng();
-		var slat = destination.lat();
-		var slng = destination.lng();
+		var dlat = destination.lat(); //alert("dlat"+dlat);
+		var dlng = destination.lng(); //alert("dlng"+dlng);
+		var slat = start.lat(); //alert("slat"+slat);
+		var slng = start.lng(); //alert("slng"+slng);ionic
 		
 		launchnavigator.navigate(
 		  [dlat, dlng],
-		  //[slat, slng],
+		  [slat, slng],
 		  function(success){ console.log(success);
 			 // alert("Plugin success");
 		  },

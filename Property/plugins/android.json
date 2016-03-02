@@ -30,6 +30,9 @@
         },
         "cordova-plugin-network-information": {
             "PACKAGE_NAME": "com.ionicframework.restaurant3314339property"
+        },
+        "uk.co.workingedge.phonegap.plugin.launchnavigator": {
+            "PACKAGE_NAME": "com.ionicframework.restaurant3314339property"
         }
     },
     "dependent_plugins": {}
