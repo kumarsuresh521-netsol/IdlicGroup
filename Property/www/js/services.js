@@ -42,6 +42,36 @@ angular.module('starter.services', [])
     };
 }])
 
+
+
+.factory('news', function($q, $http) {
+
+	return({
+		newsfeed: newsfeed
+	});
+	
+	function newsfeed(team_id){ console.log("team feeds by team id");
+					
+		var request = $http.post("http://api.idyllicgroup.in/webservice/get_posts/?post_type=attachment");
+		return( request.then( handleSuccess, handleError ) );
+	}
+	
+	function handleError( response ) {
+	   if (
+			! angular.isObject( response.data ) ||
+			! response.data.message
+			) { console.log("Check service handleError function. your services call return error");
+			return( $q.reject( "An unknown error occurred." ) );
+		}
+		 return( $q.reject( response.data.message ) );
+	}
+	
+	function handleSuccess( response ) {
+		return( response.data );
+	}
+})
+           
+
 .factory('EmailComposer', ['$q', function ($q) {
 //alert("dud");
     return {

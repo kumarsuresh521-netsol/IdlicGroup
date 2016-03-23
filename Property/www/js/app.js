@@ -24,8 +24,11 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
   });
 })
 
-.config(function($stateProvider, $urlRouterProvider, $ionicConfigProvider) {
+
+.config(function($httpProvider, $stateProvider, $urlRouterProvider, $ionicConfigProvider) {
     
+	$httpProvider.defaults.headers.common['Access-Control-Allow-Headers'] = '*';
+	
     if(!ionic.Platform.isIOS())$ionicConfigProvider.scrolling.jsScrolling(false);
     
   $stateProvider
@@ -122,6 +125,15 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
       'menuContent': {
         templateUrl: 'templates/residentialproperties.html'//,
         //controller: 'AboutTheProjectCtrl'
+      }
+    }
+  })
+  
+    .state('app.news', {
+    url: '/news',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/news.html'
       }
     }
   })

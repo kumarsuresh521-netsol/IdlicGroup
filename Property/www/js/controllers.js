@@ -60,6 +60,42 @@ angular.module('starter.controllers', [])
 	$ionicHistory.clearCache();*/
 })
 
+.controller('NewsCtrl', function($scope, $http, $timeout, $ionicHistory, news) { //alert("HI");
+     /*$ionicHistory.nextViewOptions({
+	  disableBack: true
+	});
+	$ionicHistory.clearHistory();
+	$ionicHistory.clearCache();*/
+	news.newsfeed().then(function(data) { alert("resonse");
+		console.log(data);
+		$scope.response = data;
+	}).finally(function(error){
+		console.log(error);
+	});
+	/*
+	$http({
+		url: 'http://api.idyllicgroup.in/webservice/get_posts/?post_type=attachment',
+		dataType: 'json',
+		method: 'GET',
+		data: '',
+		headers: {
+			"Content-Type": "application/json"
+		}
+
+	}).success(function(response){ console.log("response");
+		$scope.response = response; console.log($scope.response[0].thumb);
+	}).error(function(error){ alert("error");
+		$scope.error = error;
+	});
+	$http.get('http://api.idyllicgroup.in/webservice/get_posts/?post_type=attachment', function(data){
+		console.log("Hii");
+		console.log(data);
+	});
+	console.log("Hiiii"); */
+	/*respone='{"data":{"thumb":"2016\/03\/022012-Website-Banners-Photomatics-1.jpg"},{"thumb":"2016\/03\/022012-Website-Banners-Photomatics-1.jpg"},{"thumb":"2016\/03\/022012-Website-Banners-Photomatics-1.jpg"}}';
+	$scope.response = respone; ]*/
+})
+
 .controller('InquiryCtrl', function($scope, EmailComposer, $ionicHistory) { 
     $scope.meetingtime = "Meeting Time";
     

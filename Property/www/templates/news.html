@@ -1,0 +1,15 @@
+<ion-view view-title="CONTACT US">
+  <ion-content ng-controller="NewsCtrl">
+<div class="card contactus">
+    <h5>News</h5>
+	<div  style="float: left;width: 100%;">
+	<div ng-repeat="x in response">
+      <div style="float: left;width: 100%;padding:5px;" ng-repeat="y in x.thumb">
+          <div style="width:100%;"><img style="width:100%;" src="img/no-thumb.png" ng-src="http://api.idyllicgroup.in/wp-content/uploads/{{y}}" /></a></div>
+      </div>
+    </div>
+	</div>
+	</p>
+</div>
+</ion-content>
+</ion-view>
