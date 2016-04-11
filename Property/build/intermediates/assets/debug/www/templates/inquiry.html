@@ -1,0 +1,35 @@
+<ion-view view-title="Inquiry Form">
+  <ion-content ng-controller="InquiryCtrl" class="inquiryform">
+
+    <div class="list list-inset" style="border: none;height:80%;">
+      <label class="item item-input"style="margin-top:10px;"> 
+        <i class="icon ion-person"></i><input type="text" placeholder="Name" ng-model="name"/>  
+      </label>
+      <br />
+      <label class="item item-input">
+        <i class="icon ion-email"></i> <input type="email" placeholder="Email"  ng-model="email"/> 
+      </label>
+      <br />
+      <label class="item item-input">
+        <i class="icon ion-iphone"></i> <input type="number" placeholder="Phone Number"  ng-model="phone"/> 
+      </label>
+      <br />
+      <label class="item item-input">
+        <i class="icon ion-android-locate"></i> <input type="text" placeholder="Address"  ng-model="address"/>
+      </label>
+      <br />
+      <label class="item item-input">
+        <i class="icon ion-android-call"></i> 
+        <select  ng-model="meetingtime"  ng-change="showSelectValue(meetingtime)" style="border: none; padding: 0 130px 0px 25px; background-color: #fff; width: 100%;">
+            <option value="5AM - 5PM">5AM - 5PM</option>
+            <option value="5AM - 5PM">5AM - 5PM</option>
+            <option value="5AM - 5PM">5AM - 5PM</option>
+            <option value="5AM - 5PM">5AM - 5PM</option>
+        </select>
+      </label>
+      <br />
+      <button class="button button-block button-positive" ng-click="submitForm()"> Submit </button>
+    </div>
+    <div id="msg"></div>
+  </ion-content>
+</ion-view>
