@@ -39,6 +39,10 @@
                         {
                             "xml": "<feature name=\"LaunchNavigator\"><param name=\"android-package\" value=\"uk.co.workingedge.phonegap.plugin.LaunchNavigator\" /></feature>",
                             "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"EmailComposer\"><param name=\"android-package\" value=\"de.appplant.cordova.emailcomposer.EmailComposer\" /></feature>",
+                            "count": 1
                         }
                     ]
                 }
@@ -48,6 +52,12 @@
                     "/*": [
                         {
                             "xml": "<uses-permission android:name=\"android.permission.ACCESS_NETWORK_STATE\" />",
+                            "count": 1
+                        }
+                    ],
+                    "/manifest": [
+                        {
+                            "xml": "<uses-permission android:name=\"android.permission.GET_ACCOUNTS\" />",
                             "count": 1
                         }
                     ]
@@ -81,6 +91,9 @@
             "PACKAGE_NAME": "com.ionicframework.restaurant3314339property"
         },
         "uk.co.workingedge.phonegap.plugin.launchnavigator": {
+            "PACKAGE_NAME": "com.ionicframework.restaurant3314339property"
+        },
+        "cordova-plugin-email-composer": {
             "PACKAGE_NAME": "com.ionicframework.restaurant3314339property"
         }
     },
@@ -148,6 +161,14 @@
             "id": "uk.co.workingedge.phonegap.plugin.launchnavigator.LaunchNavigator",
             "clobbers": [
                 "launchnavigator"
+            ]
+        },
+        {
+            "file": "plugins/cordova-plugin-email-composer/www/email_composer.js",
+            "id": "cordova-plugin-email-composer.EmailComposer",
+            "clobbers": [
+                "cordova.plugins.email",
+                "plugin.email"
             ]
         }
     ]

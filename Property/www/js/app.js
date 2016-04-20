@@ -60,6 +60,24 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
     }
   })
   
+  .state('app.newsandupdates', {
+    url: '/newsandupdates',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/newsandupdates.html'
+      }
+    }
+  })
+  
+   .state('app.societies', {
+    url: '/societies:page_name:page_id',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/societies.html'
+      }
+    }
+  })
+  
   .state('app.contactus', {
     url: '/contactus',
     views: {

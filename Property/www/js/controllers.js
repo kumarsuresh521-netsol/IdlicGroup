@@ -52,51 +52,51 @@ angular.module('starter.controllers', [])
 	$ionicHistory.clearCache();*/
 })
 
-.controller('CommercialCtrl', function($scope, $ionicHistory) {
-     /*$ionicHistory.nextViewOptions({
-	  disableBack: true
-	});
-	$ionicHistory.clearHistory();
-	$ionicHistory.clearCache();*/
+.controller('CommercialCtrl', function($scope, news, $ionicLoading) {
+	$ionicLoading.show();
+     	news.commercialproperty().then(function(data) {
+			$scope.response = data[0].post_content;
+		}).finally(function(response){
+			$ionicLoading.hide();
+		});
 })
 
-.controller('NewsCtrl', function($scope, $http, $timeout, $ionicHistory, news) { //alert("HI");
-     /*$ionicHistory.nextViewOptions({
-	  disableBack: true
-	});
-	$ionicHistory.clearHistory();
-	$ionicHistory.clearCache();*/
-	news.newsfeed().then(function(data) { alert("resonse");
-		console.log(data);
+.controller('NewsCtrl', function($scope, $http, $ionicLoading, news) {
+	$ionicLoading.show();
+	news.newsfeed().then(function(data) {
 		$scope.response = data;
 	}).finally(function(error){
-		console.log(error);
+		$ionicLoading.hide();
 	});
-	/*
-	$http({
-		url: 'http://api.idyllicgroup.in/webservice/get_posts/?post_type=attachment',
-		dataType: 'json',
-		method: 'GET',
-		data: '',
-		headers: {
-			"Content-Type": "application/json"
-		}
-
-	}).success(function(response){ console.log("response");
-		$scope.response = response; console.log($scope.response[0].thumb);
-	}).error(function(error){ alert("error");
-		$scope.error = error;
-	});
-	$http.get('http://api.idyllicgroup.in/webservice/get_posts/?post_type=attachment', function(data){
-		console.log("Hii");
-		console.log(data);
-	});
-	console.log("Hiiii"); */
-	/*respone='{"data":{"thumb":"2016\/03\/022012-Website-Banners-Photomatics-1.jpg"},{"thumb":"2016\/03\/022012-Website-Banners-Photomatics-1.jpg"},{"thumb":"2016\/03\/022012-Website-Banners-Photomatics-1.jpg"}}';
-	$scope.response = respone; ]*/
 })
 
-.controller('InquiryCtrl', function($scope, EmailComposer, $ionicHistory) { 
+.controller('NewsAndUpdatesCtrl', function($scope, $state) {
+   $scope.goToSociety = function(page_name, page_id) {
+	 $state.go("app.societies", {'page_name':page_name, 'page_id':page_id});
+   }
+})
+
+.controller('SocietyCtrl', function($scope, $http, $ionicLoading, news, $stateParams) {
+	$scope.page_title = $stateParams.page_name;
+	$ionicLoading.show();	
+	page_id = $stateParams.page_id;
+	news.societies().then(function(data) {
+	var abcd = [];
+	abc = data[page_id].post_content.split('"');
+	a = 3;
+	for(i=0; i<=abc.length; i++){
+		if(abc[a] && abc[a].length > 10){
+			abcd.push(abc[a]);
+		}
+		a = a + 10;
+	}
+	$scope.response = abcd;
+	}).finally(function(error){
+		$ionicLoading.hide();
+	});
+})
+
+.controller('InquiryCtrl', function($scope, news, $ionicHistory, $ionicLoading) { 
     $scope.meetingtime = "Meeting Time";
     
 	$ionicHistory.nextViewOptions({
@@ -104,17 +104,15 @@ angular.module('starter.controllers', [])
 	});
 	$ionicHistory.clearHistory();
 	$ionicHistory.clearCache();
-	
-    $scope.showSelectValue = function(meetingtime) {
-        $scope.meetingtime = meetingtime;
-    }
+
 
     $scope.submitForm = function(){ console.log($scope);
         var name = $scope.name; console.log($scope.name);
         var email = $scope.email;
         var phone = $scope.phone;
-        var address = $scope.address;
-        var meetingtime = $scope.meetingtime;
+        var address = '';
+		address = $scope.address;
+        
         
         if(!name){
             var msg = document.getElementById('msg');
@@ -125,7 +123,20 @@ angular.module('starter.controllers', [])
                     msg.innerHTML = ''
                 }, 3000);
                 return;
-        } else if(email){
+        } 
+		
+		if(!email){
+            var msg = document.getElementById('msg');
+			msg.className = "card";
+            msg.innerHTML = "Please Enter your email id.";
+               setTimeout(function() {
+				   msg.className = "";
+                    msg.innerHTML = ''
+                }, 3000);
+                return;
+        }
+
+		if(email){
              var re = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
              if(!re.test(email)){
                var msg = document.getElementById('msg');
@@ -137,7 +148,9 @@ angular.module('starter.controllers', [])
                     }, 3000);
                return;
              }
-        } else if(!phone){
+        } 
+
+		if(!phone){
             var msg = document.getElementById('msg');
 			msg.className = "card";
             msg.innerHTML = "Please Enter your phone number.";
@@ -146,23 +159,42 @@ angular.module('starter.controllers', [])
                     msg.innerHTML = ''
                 }, 3000);
                 return;
-        } 
+        }
+		
+		if(!address || address == 'undefined'){
+            address = '';
+        }
+
+        $ionicLoading.show();
+        var message='';
+        message = message + 'Dear Admin, \n\n';
+        message = message + 'A Inquiry Request is received with information below..\n\n';
+        message = message + 'Name: '+name+'\n\n';
+        message = message + 'Email: '+email+'\n\n';
+        message = message + 'Phone: '+phone+'\n\n';
+        message = message + 'Address: '+address
         
         
-        
-        
-        //alert("ddd");
-        
-        var str='';
-        str = str + 'Dear Admin, <br/>';
-        str = str + 'A Inquiry Request is received with information below..<br/>';
-        str = str + 'Name: '+name+'<br/>';
-        str = str + 'Email: '+email+'<br/>';
-        str = str + 'Phone: '+phone+'<br/>';
-        str = str + 'Address: '+address+'<br/>';
-        str = str + 'Meeting Time: '+meetingtime;
-        
-        
+		news.inquiry(name, email, phone, address).then(function(data) {
+			$scope.response = data;
+			
+		}).finally(function(response){ console.log(response);
+			$scope.name = '';
+			$scope.email = '';
+			$scope.phone = '';
+			$scope.address = '';
+			
+		$ionicLoading.hide();
+			var msg = document.getElementById('msg');
+			msg.className = "card";
+            msg.innerHTML = "You'll be shortly contacted by our representative.";
+               setTimeout(function() {
+				   msg.className = "";
+                    msg.innerHTML = ''
+                }, 3000);
+                return;
+		});
+/*		
         EmailComposer.isAvailable().then(function() {// alert("is available");
            // is available
          }, function () { //alert("not available");
@@ -186,7 +218,8 @@ angular.module('starter.controllers', [])
         console.log(email);
          EmailComposer.open(email).then(null, function () { //alert("success");
            // user cancelled email
-         });   
+         });  
+*/		 
     }
 })
 

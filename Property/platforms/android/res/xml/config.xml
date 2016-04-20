@@ -29,6 +29,9 @@
     <feature name="LaunchNavigator">
         <param name="android-package" value="uk.co.workingedge.phonegap.plugin.LaunchNavigator" />
     </feature>
+    <feature name="EmailComposer">
+        <param name="android-package" value="de.appplant.cordova.emailcomposer.EmailComposer" />
+    </feature>
     <icon density="ldpi" src="resources/android/icon/drawable-ldpi-icon.png" />
     <icon density="mdpi" src="resources/android/icon/drawable-mdpi-icon.png" />
     <icon density="hdpi" src="resources/android/icon/drawable-hdpi-icon.png" />
@@ -56,14 +59,10 @@
     </author>
     <content src="index.html" />
     <access origin="*" />
-    <preference name="webviewbounce" value="false" />
-    <preference name="UIWebViewBounce" value="false" />
-    <preference name="DisallowOverscroll" value="true" />
-    <preference name="android-minSdkVersion" value="16" />
     <preference name="BackupWebStorage" value="none" />
-    <preference name="SplashScreen" value="screen" />
-    <preference name="SplashScreenDelay" value="5000" />
-    <preference name="Fullscreen" value="false" />
+    <preference name="android-minSdkVersion" value="16" />
+    <preference name="AutoHideSplashScreen" value="false" />
+    <preference name="SplashScreenDelay" value="10000" />
     <preference name="Orientation" value="portrait" />
     <preference name="xwalkVersion" value="14+" />
     <preference name="xwalkCommandLine" value="--disable-pull-to-refresh-effect" />

@@ -47,12 +47,32 @@ angular.module('starter.services', [])
 .factory('news', function($q, $http) {
 
 	return({
-		newsfeed: newsfeed
+		newsfeed: newsfeed,
+		inquiry: inquiry,
+		commercialproperty: commercialproperty,
+		societies: societies
 	});
 	
-	function newsfeed(team_id){ console.log("team feeds by team id");
+	function newsfeed(){
 					
 		var request = $http.post("http://api.idyllicgroup.in/webservice/get_posts/?post_type=attachment");
+		return( request.then( handleSuccess, handleError ) );
+	}
+	
+	function societies(){
+		var request = $http.post("http://api.idyllicgroup.in/webservice/get_posts/?post_type=post");
+		return( request.then( handleSuccess, handleError ) );
+	}
+	
+	function inquiry(name, email, phone, address){
+		var url = "http://api.idyllicgroup.in/webservice/get_posts/?post_type=attachment&name="+name+"&email="+email+"&phone="+phone+"&address="+address;
+		var request = $http.post(url);
+		return( request.then( handleSuccess, handleError ) );
+	}
+	
+	function commercialproperty(){
+		var url = "http://api.idyllicgroup.in/webservice/get_posts/?post_type=page";
+		var request = $http.post(url);
 		return( request.then( handleSuccess, handleError ) );
 	}
 	
